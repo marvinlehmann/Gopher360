@@ -537,7 +537,13 @@ void Gopher::handleMouseMovement()
   y -= dy;
   _yRest = y - (float)((int)y);
 
-  SetCursorPos((int)x, (int)y); //after all click input processing
+  INPUT input;
+  input.type = INPUT_MOUSE;
+  input.mi.dx = dx;
+  input.mi.dy = dy * -1;
+  input.mi.dwFlags = MOUSEEVENTF_MOVE;
+  input.mi.time = 0;
+  SendInput(1, &input, sizeof(INPUT));
 }
 
 // Description:
